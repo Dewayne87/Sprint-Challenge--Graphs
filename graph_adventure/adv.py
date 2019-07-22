@@ -123,7 +123,7 @@ class Graph:
                 s.push(copy_path)
 
 
-traversalPath = ['n', 'n']
+traversalPath = []
 # start in room 0 
 # pick a direction at random
 # if direction = ? go that direction dft?
@@ -133,9 +133,30 @@ traversalPath = ['n', 'n']
 graph = {
     0: {'n': '?', 's': '?', 'w': '?', 'e': '?'}
 }
-player.travel("n")
-for exit in player.currentRoom.getExits():
-    graph[player.currentRoom.id] = {exit:"?"}
+def dft(starting_vertex):
+
+    s = Stack()
+    visited = [starting_vertex]
+    # while len(visited) < len(roomGraph):
+    for key in starting_vertex:
+        if key == "?":
+            print(key)
+            player.travel(key)
+            visited.append(player.currentRoom.id)
+            traversalPath.append(key)
+dft(graph[0])
+def exitsfunction():
+    exits = player.currentRoom.getExits()
+    if len(exits) == 4:
+        graph[player.currentRoom.id] = {exits[0]:"?",exits[1]:"?",exits[2]:"?",exits[3]:"?"}
+    if len(exits) == 3:
+        graph[player.currentRoom.id] = {exits[0]:"?",exits[1]:"?",exits[2]:"?"}
+    if len(exits) == 2:
+        graph[player.currentRoom.id] = {exits[0]:"?",exits[1]:"?"}
+    if len(exits) == 1:
+        graph[player.currentRoom.id] = {exits[0]:"?"}
+exitsfunction()
+
 print(graph)
 # FILL THIS IN
 
